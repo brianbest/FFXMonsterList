@@ -2,7 +2,6 @@ import MonsterLocationService from "./MonsterLocationService";
 class MonsterLocationController {
   constructor() {
     this.monsterLocationService = new MonsterLocationService();
-    this.monsterLocationService.createLocation('besaid', ['mons2ter1', "monster2"]);
   }
 
   displayLocations() {
@@ -10,6 +9,14 @@ class MonsterLocationController {
       console.log(location.getName());
       console.log("monsters:" + location.getMonsters().toString());
     });
+  }
+
+  setLocation(name, monsters) {
+    this.monsterLocationService.createLocation(name, monsters);
+  }
+
+  getLocations() {
+    return this.monsterLocationService.getLocations();
   }
 }
 
