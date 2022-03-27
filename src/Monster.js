@@ -24,8 +24,14 @@ class Monster {
     this.numberCaught--;
   }
 
-  getCaughtCount(){
+  getCaughtCount() {
     return this.numberCaught;
+  }
+
+  toObject() {
+    return {
+      name: this.getName()
+    };
   }
 }
 

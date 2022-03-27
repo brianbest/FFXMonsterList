@@ -1,4 +1,4 @@
-import MonsterLocationService from "./MonsterLocationService";
+import MonsterLocationService from "./MonsterLocationService.js";
 class MonsterLocationController {
   constructor() {
     this.monsterLocationService = new MonsterLocationService();

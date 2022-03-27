@@ -1,8 +1,8 @@
-import Location from "./Location";
-import Monster from "./Monster";
+import Location from "./Location.js";
+import Monster from "./Monster.js";
 
 class MonsterLocationService {
-  constructor(){
+  constructor() {
     this.locationList = [];
   }
 
