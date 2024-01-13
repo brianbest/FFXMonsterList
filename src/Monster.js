@@ -1,6 +1,7 @@
 class Monster {
   constructor(name) {
     this.name = name;
+    this.id = name.replace(" ", "-") + "-" + Math.floor(Math.random() * 1000000);
     this.numberCaught = 0;
   }
 

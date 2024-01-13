@@ -1,13 +1,16 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
+import autoprefixer from 'autoprefixer';
+import tailwindcss from 'tailwindcss';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-module.exports = {
+export default {
   entry: {
-    main: path.resolve(__dirname, './src/app.js')
+    main: path.resolve(process.cwd(), './src/app.js')
   },
   output: {
     filename: 'main.bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(process.cwd(), 'dist')
   },
   devServer:{
     static: "./dist",
@@ -17,13 +20,18 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "Brian's Website",
       template: './src/index.html',
-    })
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+    tailwindcss,
   ],
   resolve: { extensions: ["*", ".js", ".jsx"] },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|cjs)$/,
         exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
         options: { presets: ["@babel/env"] }
@@ -35,27 +43,21 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
+          MiniCssExtractPlugin.loader,
           "css-loader",
           {
-            // Run postcss actions
             loader: 'postcss-loader',
             options: {
-              // `postcssOptions` is needed for postcss 8.x;
-              // if you use postcss 7.x skip the key
               postcssOptions: {
-                // postcss plugins, can be exported to postcss.config.js
                 plugins: function () {
                   return [
-                    require('autoprefixer')
+                    tailwindcss,
+                    autoprefixer
                   ];
                 }
               }
             }
           },
-          // Compiles Sass to CSS
           "sass-loader",
         ],
       },

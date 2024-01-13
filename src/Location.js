@@ -3,6 +3,7 @@ import Monster from "./Monster.js";
 class Location {
   constructor(name, monsters) {
     this.name = name;
+    this.id = name.replace(" ", "-") + "-" + Math.floor(Math.random() * 1000000);
     this.monsters = monsters.map(monster => {
       return new Monster(monster.name);
     });
