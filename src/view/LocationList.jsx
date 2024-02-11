@@ -12,17 +12,9 @@ function App() {
 
   useEffect(() => {
     setLocations(monsterListController.getLocations());
-    console.log(monsterListController);
     setMaxMonstersCaught(monsterListController.getNumberOfMonstersAtMaxCaught());
     setTotalMonsters(monsterListController.getTotalNumberOfMonsters());
   }, [locationActivate]);
-
-  useEffect(() => {
-    setMaxMonstersCaught(monsterListController.getNumberOfMonstersAtMaxCaught());
-    setTotalMonsters(monsterListController.getTotalNumberOfMonsters());
-  }, [maxMonstersCaught]);
-
-
 
   const onLocationActivated = (location) => {
     setlocationActivate(location.id);

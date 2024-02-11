@@ -11,6 +11,7 @@ const LocationItem = ({ location, onLocationActivated, onLocationChange, locatio
 
     const onMonsterCaptureChange = () => {
         setAllMonstersCaptured(monsters.every(monster => monster.getCaughtCount() >= monsterListController.monsterLocationService.getMaxNumberOfMonsters()));
+        onLocationChange();
     }
     const locationClicked = () => {
         if (status == location.id) {
@@ -38,7 +39,6 @@ const LocationItem = ({ location, onLocationActivated, onLocationChange, locatio
     useEffect(() => {
         setStatus(locationStatus);
         setLocationState(locationState);
-        onLocationChange();
     }, [locationStatus, locationState]);
 
     return (
