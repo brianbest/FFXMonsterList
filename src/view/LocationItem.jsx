@@ -9,9 +9,12 @@ const LocationItem = ({ location, onLocationActivated, onLocationChange, locatio
     const [allMonstersCaptured, setAllMonstersCaptured] = useState(false); 
     const [status, setStatus] = useState(locationStatus);
 
-    const onMonsterCaptureChange = () => {
-        setAllMonstersCaptured(monsters.every(monster => monster.getCaughtCount() >= monsterListController.monsterLocationService.getMaxNumberOfMonsters()));
-        onLocationChange();
+    const onMonsterCaptureChange = (fn) => {
+        return () => {
+            fn();
+            setAllMonstersCaptured(monsters.every(monster => monster.getCaughtCount() >= monsterListController.monsterLocationService.getMaxNumberOfMonsters()));
+            onLocationChange();
+        };
     }
     const locationClicked = () => {
         if (status == location.id) {
@@ -39,7 +42,8 @@ const LocationItem = ({ location, onLocationActivated, onLocationChange, locatio
     useEffect(() => {
         setStatus(locationStatus);
         setLocationState(locationState);
-    }, [locationStatus, locationState]);
+        onMonsterCaptureChange();
+    }, [locationStatus, locationState, monsters]);
 
     return (
         <div className={'bg-white shadow-lg rounded-lg p-4 ' + (checkStatus())} onClick={locationClicked}>
@@ -53,7 +57,13 @@ const LocationItem = ({ location, onLocationActivated, onLocationChange, locatio
             </div>
             <div className={'grid grid-cols-1 sm:grid-cols-2 gap-2 ' + (status ? '' : 'hidden')}>
                 {location.monsters.map((monster) => (
-                    <MonsterItem key={monster.id} monster={monster} onMonsterCaptureChange={onMonsterCaptureChange} />
+                    <MonsterItem
+                        key={monster.id}
+                        name={monster.name}
+                        caughtCount = {monster.getCaughtCount()}
+                        incrementCaught = {onMonsterCaptureChange(monster.incrementCaught)}
+                        decrementCaught = {onMonsterCaptureChange(monster.decrementCaught)}
+                        setMaxCaught = {onMonsterCaptureChange(monster.setMaxCaught)} />
                 ))}
             </div>
         </div>

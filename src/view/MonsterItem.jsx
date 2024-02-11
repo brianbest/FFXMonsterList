@@ -1,40 +1,36 @@
 import React, { useEffect, useState } from 'react';
+// import PropTypes from 'prop-types';
+import GradientButton from './components/GradientButton.jsx';
 
-const MonsterItem = ({ monster, onMonsterCaptureChange }) => {
-    const [numCaught, setNumCaught] = useState(monster.getCaughtCount());
+const MonsterItem = ({ name, caughtCount, incrementCaught, decrementCaught, setMaxCaught }) => {
+    const [numCaught, setNumCaught] = useState(caughtCount);
 
-    const incrementCaught = () => {
-        monster.incermentCaught();
-        setNumCaught(monster.getCaughtCount());
-        onMonsterCaptureChange();
+    const handleIncrement = () => {
+        incrementCaught();
+        setNumCaught(caughtCount);
     };
 
-    const decrementCaught = () => {
-        monster.decrmentCaught();
-        setNumCaught(monster.getCaughtCount());
-        onMonsterCaptureChange();
+    const handleDecrement = () => {
+        decrementCaught();
+        setNumCaught(caughtCount);
     };
 
-    const setMaxCaught = () => {
-        monster.setMaxCaught();
-        setNumCaught(monster.getCaughtCount());
-        onMonsterCaptureChange();
+    const handleSetMax = () => {
+        setMaxCaught();
+        setNumCaught(caughtCount);
     };
 
     useEffect(() => {
-        setNumCaught(monster.getCaughtCount());
-    }  , [monster]);
+        setNumCaught(caughtCount);
+    }  , [caughtCount]);
 
     return (
         <div>
-            <h2>{monster.name}</h2>
+            <h2>{name}</h2>
             <p>Number Caught: {numCaught}</p>
-            <button onClick={incrementCaught}
-            className='text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>+</button>
-            <button onClick={decrementCaught}
-            className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>-</button>
-            <button onClick={setMaxCaught}
-            className='text-white bg-gradient-to-r from-violet-400 via-violet-500 to-violet-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>max</button>
+            <GradientButton onClick={handleIncrement} color="green" text="+" />
+            <GradientButton onClick={handleDecrement} color="red" text="-" />
+            <GradientButton onClick={handleSetMax} color="violet" text="max" />
         </div>
     );
 };
