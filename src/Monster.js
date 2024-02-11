@@ -3,6 +3,7 @@ class Monster {
     this.name = name;
     this.id = name.replace(" ", "-") + "-" + Math.floor(Math.random() * 1000000);
     this.numberCaught = 0;
+    this.maxCaptureable = 10;
   }
 
   getName() {
@@ -10,7 +11,7 @@ class Monster {
   }
 
   incermentCaught() {
-    if (this.numberCaught == 10) {
+    if (this.numberCaught == this.maxCaptureable) {
       return;
     }
 
@@ -23,6 +24,10 @@ class Monster {
     }
 
     this.numberCaught--;
+  }
+
+  setMaxCaught() {
+    this.numberCaught = this.maxCaptureable;
   }
 
   getCaughtCount() {

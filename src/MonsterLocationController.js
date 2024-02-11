@@ -18,6 +18,19 @@ class MonsterLocationController {
   getLocations() {
     return this.monsterLocationService.getLocations();
   }
+  getTotalNumberOfMonsters(){
+    return this.getLocations().reduce((acc, location) => {
+      return acc + location.getMonsters().length;
+    }, 0);
+  }
+
+  getNumberOfMonstersAtMaxCaught() {
+    return this.getLocations().reduce((acc, location) => {
+      return acc + location.getMonsters().filter(monster => {
+        return monster.getCaughtCount() == monster.maxCaptureable;
+      }).length;
+    }, 0);
+  }
 }
 
 export default MonsterLocationController;

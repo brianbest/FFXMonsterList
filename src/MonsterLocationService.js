@@ -14,6 +14,8 @@ class MonsterLocationService {
     return this.locationList;
   }
 
+
+
   getMaxNumberOfMonsters() {
     return 10
   }
