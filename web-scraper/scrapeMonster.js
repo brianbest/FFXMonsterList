@@ -1,46 +1,58 @@
-async function scrapeMonsterData($, location, connection) {
+async function scrapeMonsterData($) {
     // 1. Extract Data
     const name = $('h2').text().trim(); // Get the full text with jQuery
     const nameParts = name.split('Fiend Listing'); // Split into parts based on line break
     const monsterName = nameParts[0].trim(); 
-    const hp = parseInt(extractHPValue($));
-    const imageUrl = $('img.img-fluid').attr('src');
+    const hp = extractHPValue($);
+    const imageUrl = $('#page-top > div.container.main-body > div > div.col-12.col-lg-8.col-xl-9 > div.screenshot-image.mx-auto.d-block > div > a > img').attr('src');
     const arenaLocation = $('p:contains("Monster Arena") a:nth-child(2)').text().trim();
     // 2. Determine type_id 
-    const possibleTypes = ['Wolf','Lupine', 'Reptile', 'Bird', 'Wasp', 'Imp', 'Bat', 'Flan', 'Element', 'Armored', 'Helm', 'Fungii', 'Bomb', 'Ruminant', 'Giant'];
     const descriptionText = $('p:not(:has(table))').text();
-    let typeId = null;
-
-    for (const monsterType of possibleTypes) {
-        const pattern = new RegExp(`\\b${monsterType}-type\\b`, 'i');
-        if (pattern.test(descriptionText)) {
-            typeId = fetchTypeIdFromDatabase(monsterType); 
-            break; 
-        }
+    const monsterType = determineMonsterType(descriptionText);
+    if (monsterType) {
+        typeId = fetchTypeIdFromDatabase(monsterType);
+    } else {
+        console.warn('Type not found in description!');
+        typeId = 15; 
     }
 
-    locationId = fetchLocationIdFromDatabase(location);
-
-    // check to see if monster already exists in the database
-    
+    // if hp is 0 alert the user the location and name of the monster
+    if (hp === 0) {
+        console.log(`Monster ${monsterName} at location ${location} has 0 HP`);
+    }
 
 
     if (!typeId) {
-        console.error('Type not found in description!');
-        typeId = 0; 
+        typeId = 15; // 15 is unknown, which is valid for this  
     }
 
-
-
-    // 3. Construct SQL Statement (same as before)
-    const sqlInsert = `INSERT INTO monsters (name, type_id, hp, image_url, arena_location) 
-                       VALUES ('${monsterName}', ${typeId}, ${hp}, '${imageUrl}', '${arenaLocation}');`;
-
-    // 4. Output the SQL
-
-    return await connection.query(sqlInsert);
+    return {
+        insertSql: buildMonsterInsertStatement(monsterName, typeId, hp, imageUrl, arenaLocation, fetchLocationIdFromDatabase(arenaLocation)),
+        monsterName,
+        typeId,
+        hp,
+        imageUrl,
+        arenaLocation
+    };
 }
 
+function buildMonsterInsertStatement(monsterName, typeId, hp, imageUrl, arenaLocation, locationId) {
+    return `INSERT INTO monsters (name, type_id, hp, image_url, arena_location, location_id) 
+            VALUES ('${monsterName}', ${typeId}, ${hp}, '${imageUrl}', '${arenaLocation}', ${locationId});`;
+
+}
+
+function determineMonsterType(descriptionText) {
+    const possibleTypes = ['Wolf','Lupine', 'Reptile', 'Bird', 'Wasp', 'Imp', 'Bat', 'Flan', 'Element', 'Armored', 'Helm', 'Fungii', 'Bomb', 'Ruminant', 'Giant'];
+    for (const monsterType of possibleTypes) {
+        const pattern = new RegExp(`\\b${monsterType}-type\\b`, 'i');
+        if (pattern.test(descriptionText)) {
+            return monsterType;
+        }
+    }
+    return null;
+
+}
 
 function fetchTypeIdFromDatabase(monsterType) {
     const typeMap = {
@@ -54,42 +66,45 @@ function fetchTypeIdFromDatabase(monsterType) {
         'Flan': 7,
         'Element': 8,
         'Armored': 9,
-        'Helm': 9,
-        'Fungii': 10,
-        'Bomb': 11,
-        'Ruminant': 12,
-        'Giant': 13
+        'Helm': 10,
+        'Fungii': 11,
+        'Bomb': 12,
+        'Ruminant': 13,
+        'Giant': 14,
+        'Unknown': 15
     };
 
     return typeMap[monsterType];
+}
+
+function extractHPValue($) {
+    const originalText = $('p strong:contains("HP:")').first().parent().text();
+    const hpValue = originalText.replace(/HP:|,/g, '').trim(); // Remove "HP:" and commas globally
+    return hpValue ? parseInt(hpValue) : 0; // Parse and return the integer or 0 if empty
 }
 
 function fetchLocationIdFromDatabase(location) {
     const locationMap = {
         'Besaid': 1,
         'Kilika': 2,
-        'Mi\'ihen Highroad': 3,
+        'Mi’ihen Highroad': 3,
         'Mushroom Rock Road': 4,
-        'Djose Highroad': 5,
+        'Djose Road': 5,
         'Thunder Plains': 6,
-        'Macalania Woods': 7,
+        'Macalania': 7,
         'Bikanel': 8,
         'Calm Lands': 9,
         'Stolen Fayth Cavern': 10,
         'Mt. Gagazet': 11,
         'Omega Ruins': 12,
-        'Inside Sin': 13
+        'Inside Sin': 13,
+        'Arena Conquest': 14,
+        'Species Conquest': 15,
+        'Original': 16,
     };
-
+    //search url for location string. ignore any single quotes periods or spaces
     return locationMap[location];
 
-}
-
-function extractHPValue($) {
-    let $pTag = $('p strong:contains("HP:")').first().parent(); 
-    let originalText = $pTag.text(); 
-    let newText = originalText.replace("HP:", "");
-    return newText.trim(); 
 }
 
 

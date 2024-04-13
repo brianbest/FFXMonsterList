@@ -1,4 +1,4 @@
-function scrapeMonsterItems(monsterId, $, connection, existingItemNames) {
+function scrapeDrops(monsterId, $, connection, existingItemNames) {
     const [stealItems, dropItems] = extractItems($);
     // log the count of steal and drop items
     console.log(`Steal Items: ${stealItems.length}`);
@@ -89,4 +89,4 @@ function generateMonsterItemInserts(monsterId, items, type) {
 
 
 
-module.exports = scrapeMonsterItems;
+module.exports = scrapeDrops;
