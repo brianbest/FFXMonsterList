@@ -12,26 +12,26 @@ const locationIndexUrl = 'https://jegged.com/Games/Final-Fantasy-X/Monster-Arena
         const locationLinks = await getLocationLinks(locationIndexUrl);
 
         // Sequentially scrape each location link
-        // for (const locationLink of locationLinks) {
-        //     const locationMonsterLinks = await getMonsterLinks(locationLink);
-        //     //Sequentially scrape each monster data
-        //     for (const monsterLink of locationMonsterLinks) {
-        //         await scrapeData(monsterLink); // Make sure scrapeData is an async function
-        //     }
-        //     // Prompt the user to review the scraped data
-        //     const userResponse = await askQuestion(`Does the data look good in the database? https://jegged.com/Games/Final-Fantasy-X/Monster-Arena/${locationLink} (y/n): `);
-        //     if (userResponse.toLowerCase() === 'n') {
-        //         console.log('Scraping discontinued. Exiting...');
-        //         process.exit(); // Exit the program
-        //     }
-        //     // If user presses 'y', the function will simply continue to the next iteration.
-        // }
+        for (const locationLink of locationLinks) {
+            const locationMonsterLinks = await getMonsterLinks(locationLink);
+            //Sequentially scrape each monster data
+            for (const monsterLink of locationMonsterLinks) {
+                await scrapeData(monsterLink); // Make sure scrapeData is an async function
+            }
+            // Prompt the user to review the scraped data
+            const userResponse = await askQuestion(`Does the data look good in the database? https://jegged.com/Games/Final-Fantasy-X/Monster-Arena/${locationLink} (y/n): `);
+            if (userResponse.toLowerCase() === 'n') {
+                console.log('Scraping discontinued. Exiting...');
+                process.exit(); // Exit the program
+            }
+            // If user presses 'y', the function will simply continue to the next iteration.
+        }
 
         // DEBUG get the first location and scrape the first monster
-        const locationLink = locationLinks[0];
-        const locationMonsterLinks = await getMonsterLinks(locationLink);
-        const monsterLink = locationMonsterLinks[0];
-        await scrapeData(monsterLink);
+        // const locationLink = locationLinks[0];
+        // const locationMonsterLinks = await getMonsterLinks(locationLink);
+        // const monsterLink = locationMonsterLinks[0];
+        // await scrapeData(monsterLink);
 
         // DEBUG get the first location and scrape the monsters in location
         // const locationLink = locationLinks[0];
@@ -53,7 +53,6 @@ async function getLocationLinks(rootUrl) {
     $('#page-top > div > div > div.col-12.col-lg-8.col-xl-9 > div:nth-child(21) a.list-group-item.side-list-group-item').each((i, elem) => {
         locationLinks.push(rootUrl + elem.attribs.href.slice(0, -1));
     });
-    console.log(locationLinks);
     return locationLinks;
 }
 
@@ -78,7 +77,6 @@ async function scrapeData(monsterUrl, locationId) {
         database: 'ffx-prod',
     });
     try {
-        //const discard = await trucateTables(connection);
         const scrapedMonsterData = await scrapeMonsterData($, locationId, connection);
 
 
@@ -88,20 +86,44 @@ async function scrapeData(monsterUrl, locationId) {
         }
         const monsterId = monsterEntry[0].insertId;
 
-        const [itemResults, itemFeilds] = await connection.query('SELECT name FROM items');
 
-        // transform the results into an array of strings using the name property
-        const existingItemNames = itemResults.map(item => item.name);
-
-        scrapeDrops(monsterId, $, connection, existingItemNames).forEach(async (sqlStatement) => {
-            console.log(sqlStatement);
-            await connection.query(sqlStatement);
-        });
+        const {stealItems, dropItems} = await scrapeDrops($);
+        console.log(stealItems);
+        // for each item type, find the item in the database and link it to the monster
+        await processItems(stealItems, 'steal', connection, monsterId);
+        await processItems(dropItems, 'drop', connection, monsterId);
     }
     catch (error) {
         console.error(error);
     }
 
+}
+
+// a function that will check the name of a given item for a match in the database, if it finds a match it will return the id of the item
+async function fetchItemIdFromDatabase(itemName, connection) {
+    const [results, fields] = await connection.query(`SELECT id FROM items WHERE name = '${itemName}'`);
+    if (results.length === 0) {
+        return null;
+    }
+    return results[0].id;
+}
+
+async function linkItemToMonster(monsterId, itemId, connection, type,count, rarity) {
+    const table = type === 'steal' ? 'monster_item_steals' : 'monster_item_drops';
+    const [results, fields] = await connection.query(`INSERT INTO ${table} (monster_id, item_id, count, rarity) VALUES (${monsterId}, ${itemId}, ${count}, '${rarity}')`);
+    return results;
+
+}
+
+async function processItems(items, category, connection, monsterId) {
+    for (const { name, count, rarity } of items) {
+        const itemId = await fetchItemIdFromDatabase(name, connection);
+        if (itemId === null) {
+            console.warn(`Item ${name} not found in database`);
+            continue;
+        }
+        await linkItemToMonster(monsterId, itemId, connection, category, count, rarity);
+    }
 }
 
 function askQuestion(query) {
