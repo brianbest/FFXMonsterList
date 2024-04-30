@@ -19,7 +19,7 @@ function updateUser({username, email}) {
 async function getUser(uuid) {
     const results = await db.query('SELECT * FROM users WHERE uuid = ?', [uuid]);
     if (results[0].length != 0) {
-        return createUserFromRow(results[0][0]);
+        return _createUserFromRow(results[0][0]);
     }
 
     return null; // no user found
@@ -29,7 +29,7 @@ function deleteUser(uuid) {
     return db.query('DELETE FROM users WHERE uuid = ?', [uuid]);
 }
 
-function createUserFromRow(row) {
+function _createUserFromRow(row) {
     return new User(row.uuid, row.username, row.email, row.create_date, row.last_modified_date);
 }
 
