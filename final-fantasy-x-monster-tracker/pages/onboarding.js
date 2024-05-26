@@ -6,7 +6,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import User from '../components/user';
 
 
-export default function Onboarding() {
+function Onboarding() {
     const { user, error, isLoading } = useUser();
 
     return (
@@ -16,3 +16,5 @@ export default function Onboarding() {
         </div>
     );
 }
+
+export default Onboarding;
