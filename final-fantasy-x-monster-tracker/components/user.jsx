@@ -8,13 +8,14 @@ export default function ProfileClient() {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
-  if (!user) return <a href="/api/auth/login">Login</a>;
+  //if user is not set or is an empty object, return a login link
+  if (!user || Object.keys(user).length === 0) return <a href="/api/auth/login">Login</a>;
+  
 
   useEffect(() => {
     console.log(user, error, isLoading);
-  },[])
+  },[user, error, isLoading]);
 
-  console.log(user);
   return (
     user && (
       <div>

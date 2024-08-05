@@ -8,10 +8,14 @@ import User from '../components/user';
 
 function Onboarding() {
     const { user, error, isLoading } = useUser();
-
+    // log user when updated
+    useEffect(() => {
+        console.log(user);
+    }, [user]);
     return (
         <div>
             <h1>Onboarding</h1>
+            
             <User />
         </div>
     );

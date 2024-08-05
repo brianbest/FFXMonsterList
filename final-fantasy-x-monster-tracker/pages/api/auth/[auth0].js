@@ -18,7 +18,6 @@ const afterCallback = async (req, res, session, state) => {
         return state;
     }
 
-    state.returnTo = '/onboarding';
     return state;
 }
 export default handleAuth(
