@@ -1,0 +1,116 @@
+{
+    "name": "Omega Dungeon",
+    "fiends": [
+      {
+        "name": "Zaurus",
+        "hp": 280,
+        "mp": 20,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Lizard",
+        "drops": {
+          "common": "Zaurus Scale",
+          "bribe": "Strength Sphere"
+        }
+      },
+      {
+        "name": "Floating Death",
+        "hp": 300,
+        "mp": 25,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Spirit",
+        "drops": {
+          "common": "Death Essence",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Black Element",
+        "hp": 350,
+        "mp": 80,
+        "elementalWeakness": "0.5× Fire, 0.5× Ice; 1.5× Water",
+        "fiendType": "Elemental",
+        "drops": {
+          "common": "Black Gem",
+          "bribe": "Mana Sphere"
+        }
+      },
+      {
+        "name": "Halma",
+        "hp": 320,
+        "mp": 15,
+        "elementalWeakness": "1.5× Wind",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Halma Horn",
+          "bribe": "HP Sphere"
+        }
+      },
+      {
+        "name": "Puroboros",
+        "hp": 400,
+        "mp": 30,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Reptile",
+        "drops": {
+          "common": "Puroboros Scale",
+          "bribe": "Defense Sphere"
+        }
+      },
+      {
+        "name": "Spirit",
+        "hp": 260,
+        "mp": 20,
+        "elementalWeakness": "1.5× Holy",
+        "fiendType": "Ghost",
+        "drops": {
+          "common": "Spirit Essence",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Machea",
+        "hp": 300,
+        "mp": 15,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Reptile",
+        "drops": {
+          "common": "Machea Skin",
+          "bribe": "Attack Sphere"
+        }
+      },
+      {
+        "name": "Master Coeurl",
+        "hp": 350,
+        "mp": 25,
+        "elementalWeakness": "1.5× Water",
+        "fiendType": "Cat",
+        "drops": {
+          "common": "Master Coeurl Claw",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Master Tonberry",
+        "hp": 380,
+        "mp": 20,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Dwarf",
+        "drops": {
+          "common": "Master Tonberry Blade",
+          "bribe": "Luck Sphere"
+        }
+      },
+      {
+        "name": "Varuna",
+        "hp": 320,
+        "mp": 30,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Spirit",
+        "drops": {
+          "common": "Varuna Scale",
+          "bribe": "Defense Sphere"
+        }
+      }
+    ]
+  }
+  

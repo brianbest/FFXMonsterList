@@ -1,0 +1,138 @@
+{
+    "name": "Mt. Gagazet",
+    "fiends": [
+      {
+        "name": "Bandersnatch",
+        "hp": 320,
+        "mp": 20,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Bandersnatch Claw",
+          "bribe": "Strength Sphere"
+        }
+      },
+      {
+        "name": "Ahriman",
+        "hp": 280,
+        "mp": 30,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Demon",
+        "drops": {
+          "common": "Ahriman Scale",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Dark Flan",
+        "hp": 360,
+        "mp": 35,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Flan",
+        "drops": {
+          "common": "Dark Gem",
+          "bribe": "Mana Sphere"
+        }
+      },
+      {
+        "name": "Grenade",
+        "hp": 300,
+        "mp": 15,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Bomb",
+        "drops": {
+          "common": "Grenade Fragment",
+          "bribe": "Attack Sphere"
+        }
+      },
+      {
+        "name": "Grat",
+        "hp": 260,
+        "mp": 10,
+        "elementalWeakness": "1.5× Water",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Grat Claw",
+          "bribe": "Strength Sphere"
+        }
+      },
+      {
+        "name": "Grendel",
+        "hp": 340,
+        "mp": 20,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Giant",
+        "drops": {
+          "common": "Grendel Hide",
+          "bribe": "HP Sphere"
+        }
+      },
+      {
+        "name": "Bashura",
+        "hp": 300,
+        "mp": 15,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Bashura Claw",
+          "bribe": "Attack Sphere"
+        }
+      },
+      {
+        "name": "Mandragora",
+        "hp": 240,
+        "mp": 10,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Plant",
+        "drops": {
+          "common": "Mandragora Leaf",
+          "bribe": "Defense Sphere"
+        }
+      },
+      {
+        "name": "Behemoth",
+        "hp": 450,
+        "mp": 25,
+        "elementalWeakness": "None",
+        "fiendType": "Giant",
+        "drops": {
+          "common": "Behemoth Horn",
+          "bribe": "HP Sphere"
+        }
+      },
+      {
+        "name": "Splasher",
+        "hp": 300,
+        "mp": 15,
+        "elementalWeakness": "1.5× Water",
+        "fiendType": "Amphibian",
+        "drops": {
+          "common": "Splasher Scale",
+          "bribe": "Defense Sphere"
+        }
+      },
+      {
+        "name": "Achelous",
+        "hp": 320,
+        "mp": 20,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Achelous Claw",
+          "bribe": "Attack Sphere"
+        }
+      },
+      {
+        "name": "Maelspike",
+        "hp": 340,
+        "mp": 20,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Dragon",
+        "drops": {
+          "common": "Maelspike Scale",
+          "bribe": "Strength Sphere"
+        }
+      }
+    ]
+  }
+  

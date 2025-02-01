@@ -1,0 +1,39 @@
+{
+    "name": "Besaid",
+    "fiends": [
+      {
+        "name": "Dingo",
+        "hp": 125,
+        "mp": 10,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Lupine",
+        "drops": {
+          "common": "Potion or Sleeping Powder",
+          "bribe": "Power Sphere"
+        }
+      },
+      {
+        "name": "Condor",
+        "hp": 95,
+        "mp": 15,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Bird",
+        "drops": {
+          "common": "Phoenix Down or Smoke Bomb",
+          "bribe": "Speed Sphere"
+        }
+      },
+      {
+        "name": "Water Flan",
+        "hp": 315,
+        "mp": 30,
+        "elementalWeakness": "0.5× Fire, 1.5× Lightning; Absorbs Water",
+        "fiendType": "Flan",
+        "drops": {
+          "common": "Fish Scale or Dragon Scale",
+          "bribe": "Mana Sphere"
+        }
+      }
+    ]
+  }
+  

@@ -1,0 +1,116 @@
+{
+    "name": "Macalania",
+    "fiends": [
+      {
+        "name": "Snow Wolf",
+        "hp": 350,
+        "mp": 20,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Wolf",
+        "drops": {
+          "common": "Wolf Fang",
+          "bribe": "Defense Sphere"
+        }
+      },
+      {
+        "name": "Iguion",
+        "hp": 300,
+        "mp": 25,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Feline",
+        "drops": {
+          "common": "Iguion Claw",
+          "bribe": "Attack Sphere"
+        }
+      },
+      {
+        "name": "Wasp",
+        "hp": 180,
+        "mp": 15,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Wasp",
+        "drops": {
+          "common": "Wasp Stinger",
+          "bribe": "Speed Sphere"
+        }
+      },
+      {
+        "name": "Evil Eye",
+        "hp": 220,
+        "mp": 10,
+        "elementalWeakness": "1.5× Wind",
+        "fiendType": "Eye",
+        "drops": {
+          "common": "Evil Eye Lens",
+          "bribe": "Evasion Sphere"
+        }
+      },
+      {
+        "name": "Ice Flan",
+        "hp": 400,
+        "mp": 35,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Flan",
+        "drops": {
+          "common": "Ice Gem",
+          "bribe": "Mana Sphere"
+        }
+      },
+      {
+        "name": "Blue Element",
+        "hp": 320,
+        "mp": 90,
+        "elementalWeakness": "0.5× Fire, 0.5× Ice; 1.5× Lightning",
+        "fiendType": "Elemental",
+        "drops": {
+          "common": "Blue Gem",
+          "bribe": "Mana Sphere"
+        }
+      },
+      {
+        "name": "Murussu",
+        "hp": 280,
+        "mp": 20,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Murussu Hide",
+          "bribe": "Defense Sphere"
+        }
+      },
+      {
+        "name": "Mafdet",
+        "hp": 260,
+        "mp": 25,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Mafdet Claw",
+          "bribe": "Attack Sphere"
+        }
+      },
+      {
+        "name": "Xiphos",
+        "hp": 240,
+        "mp": 15,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Reptile",
+        "drops": {
+          "common": "Xiphos Scale",
+          "bribe": "Strength Sphere"
+        }
+      },
+      {
+        "name": "Chimera",
+        "hp": 360,
+        "mp": 30,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Hybrid",
+        "drops": {
+          "common": "Chimera Mane",
+          "bribe": "Magic Sphere"
+        }
+      }
+    ]
+  }
+  

@@ -1,0 +1,105 @@
+{
+    "name": "Stolen Fayth Cavern",
+    "fiends": [
+      {
+        "name": "Yowie",
+        "hp": 250,
+        "mp": 15,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Yowie Claw",
+          "bribe": "Luck Sphere"
+        }
+      },
+      {
+        "name": "Imp",
+        "hp": 130,
+        "mp": 10,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Demon",
+        "drops": {
+          "common": "Imp Wing",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Dark Element",
+        "hp": 300,
+        "mp": 80,
+        "elementalWeakness": "0.5× Light; 1.5× Fire",
+        "fiendType": "Elemental",
+        "drops": {
+          "common": "Dark Gem",
+          "bribe": "Mana Sphere"
+        }
+      },
+      {
+        "name": "Nidhogg",
+        "hp": 450,
+        "mp": 20,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Dragon",
+        "drops": {
+          "common": "Dragon Scale",
+          "bribe": "HP Sphere"
+        }
+      },
+      {
+        "name": "Thorn",
+        "hp": 160,
+        "mp": 10,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Plant",
+        "drops": {
+          "common": "Thorn",
+          "bribe": "Defense Sphere"
+        }
+      },
+      {
+        "name": "Valaha",
+        "hp": 280,
+        "mp": 15,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Valaha Hide",
+          "bribe": "Attack Sphere"
+        }
+      },
+      {
+        "name": "Epaaj",
+        "hp": 200,
+        "mp": 10,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Reptile",
+        "drops": {
+          "common": "Epaaj Scale",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Ghost",
+        "hp": 150,
+        "mp": 50,
+        "elementalWeakness": "1.5× Holy",
+        "fiendType": "Undead",
+        "drops": {
+          "common": "Ghost Essence",
+          "bribe": "Spirit Sphere"
+        }
+      },
+      {
+        "name": "Tonberry",
+        "hp": 500,
+        "mp": 20,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Dwarf",
+        "drops": {
+          "common": "Tonberry Blade",
+          "bribe": "Luck Sphere"
+        }
+      }
+    ]
+  }
+  

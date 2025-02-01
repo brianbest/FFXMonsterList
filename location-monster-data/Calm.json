@@ -1,0 +1,105 @@
+{
+    "name": "Calm Lands",
+    "fiends": [
+      {
+        "name": "Skoll",
+        "hp": 220,
+        "mp": 15,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Wolf",
+        "drops": {
+          "common": "Skoll Fang",
+          "bribe": "Strength Sphere"
+        }
+      },
+      {
+        "name": "Nebiros",
+        "hp": 240,
+        "mp": 20,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Demon",
+        "drops": {
+          "common": "Nebiros Claw",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Flame Flan",
+        "hp": 350,
+        "mp": 30,
+        "elementalWeakness": "1.5× Water",
+        "fiendType": "Flan",
+        "drops": {
+          "common": "Flame Gem",
+          "bribe": "Mana Sphere"
+        }
+      },
+      {
+        "name": "Shred",
+        "hp": 300,
+        "mp": 15,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Shred Claw",
+          "bribe": "Attack Sphere"
+        }
+      },
+      {
+        "name": "Anacondaur",
+        "hp": 400,
+        "mp": 25,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Snake",
+        "drops": {
+          "common": "Anacondaur Scale",
+          "bribe": "Defense Sphere"
+        }
+      },
+      {
+        "name": "Ogre",
+        "hp": 500,
+        "mp": 30,
+        "elementalWeakness": "None",
+        "fiendType": "Giant",
+        "drops": {
+          "common": "Ogre Club",
+          "bribe": "HP Sphere"
+        }
+      },
+      {
+        "name": "Coeurl",
+        "hp": 280,
+        "mp": 20,
+        "elementalWeakness": "1.5× Water",
+        "fiendType": "Cat",
+        "drops": {
+          "common": "Coeurl Claw",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Chimera Brain",
+        "hp": 260,
+        "mp": 25,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Brain",
+        "drops": {
+          "common": "Chimera Brain Matter",
+          "bribe": "Intelligence Sphere"
+        }
+      },
+      {
+        "name": "Malboro",
+        "hp": 640,
+        "mp": 35,
+        "elementalWeakness": "1.5× Fire (absorbs Water)",
+        "fiendType": "Plant",
+        "drops": {
+          "common": "Malboro Spore",
+          "bribe": "Dark Matter (chance)"
+        }
+      }
+    ]
+  }
+  

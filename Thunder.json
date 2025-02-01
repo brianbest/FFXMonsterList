@@ -1,0 +1,94 @@
+{
+    "name": "Thunder Plains",
+    "fiends": [
+      {
+        "name": "Melusine",
+        "hp": 240,
+        "mp": 30,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Serpent",
+        "drops": {
+          "common": "Melusine Scale",
+          "bribe": "Defense Sphere"
+        }
+      },
+      {
+        "name": "Aerouge",
+        "hp": 220,
+        "mp": 25,
+        "elementalWeakness": "1.5× Earth",
+        "fiendType": "Bird",
+        "drops": {
+          "common": "Aerouge Feather",
+          "bribe": "Speed Sphere"
+        }
+      },
+      {
+        "name": "Buer",
+        "hp": 200,
+        "mp": 20,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Demon",
+        "drops": {
+          "common": "Buer Claw",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Gold Element",
+        "hp": 300,
+        "mp": 100,
+        "elementalWeakness": "0.5× Fire, 0.5× Ice; 1.5× Water",
+        "fiendType": "Elemental",
+        "drops": {
+          "common": "Gold Gem",
+          "bribe": "Mana Sphere"
+        }
+      },
+      {
+        "name": "Kusariqqu",
+        "hp": 260,
+        "mp": 30,
+        "elementalWeakness": "1.5× Wind",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Kusariqqu Hide",
+          "bribe": "Defense Sphere"
+        }
+      },
+      {
+        "name": "Larva",
+        "hp": 130,
+        "mp": 10,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Insect",
+        "drops": {
+          "common": "Larva Wing",
+          "bribe": "Agility Sphere"
+        }
+      },
+      {
+        "name": "Iron Giant",
+        "hp": 350,
+        "mp": 0,
+        "elementalWeakness": "None",
+        "fiendType": "Construct",
+        "drops": {
+          "common": "Iron Shard",
+          "bribe": "HP Sphere"
+        }
+      },
+      {
+        "name": "Qactuar",
+        "hp": 160,
+        "mp": 15,
+        "elementalWeakness": "1.5× Water",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Qactuar Hide",
+          "bribe": "Strength Sphere"
+        }
+      }
+    ]
+  }
+  

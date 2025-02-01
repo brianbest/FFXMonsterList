@@ -1,0 +1,105 @@
+{
+    "name": "Inside Sin",
+    "fiends": [
+      {
+        "name": "Exoray",
+        "hp": 180,
+        "mp": 20,
+        "elementalWeakness": "1.5× Holy",
+        "fiendType": "Specter",
+        "drops": {
+          "common": "Spirit Orb",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Wraith",
+        "hp": 220,
+        "mp": 30,
+        "elementalWeakness": "1.5× Holy",
+        "fiendType": "Undead",
+        "drops": {
+          "common": "Wraith Essence",
+          "bribe": "Spirit Sphere"
+        }
+      },
+      {
+        "name": "Gemini (Sword)",
+        "hp": 240,
+        "mp": 25,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Twin",
+        "drops": {
+          "common": "Twin Blade Fragment",
+          "bribe": "Attack Sphere"
+        }
+      },
+      {
+        "name": "Gemini (Club)",
+        "hp": 240,
+        "mp": 25,
+        "elementalWeakness": "1.5× Ice",
+        "fiendType": "Twin",
+        "drops": {
+          "common": "Twin Club Fragment",
+          "bribe": "Defense Sphere"
+        }
+      },
+      {
+        "name": "Demonolith",
+        "hp": 300,
+        "mp": 40,
+        "elementalWeakness": "1.5× Light",
+        "fiendType": "Rock",
+        "drops": {
+          "common": "Demonolith Shard",
+          "bribe": "Magic Sphere"
+        }
+      },
+      {
+        "name": "Great Malboro",
+        "hp": 680,
+        "mp": 40,
+        "elementalWeakness": "1.5× Fire",
+        "fiendType": "Plant",
+        "drops": {
+          "common": "Malboro Spore",
+          "bribe": "Dark Matter (chance)"
+        }
+      },
+      {
+        "name": "Barbatos",
+        "hp": 400,
+        "mp": 30,
+        "elementalWeakness": "1.5× Lightning",
+        "fiendType": "Beast",
+        "drops": {
+          "common": "Barbatos Hide",
+          "bribe": "Attack Sphere"
+        }
+      },
+      {
+        "name": "Adamantoise",
+        "hp": 500,
+        "mp": 20,
+        "elementalWeakness": "None",
+        "fiendType": "Turtle",
+        "drops": {
+          "common": "Shell Fragment",
+          "bribe": "HP Sphere"
+        }
+      },
+      {
+        "name": "Behemoth King",
+        "hp": 600,
+        "mp": 25,
+        "elementalWeakness": "None",
+        "fiendType": "Giant",
+        "drops": {
+          "common": "Behemoth King Horn",
+          "bribe": "HP Sphere"
+        }
+      }
+    ]
+  }
+  
