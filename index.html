@@ -4,53 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FFX Monster Tracker</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="app-container">
-    <header class="app-header">
-      <h1>FFX Monster Tracker</h1>
-      <p>Keep track of your captured monsters</p>
-    </header>
-    
-    <main class="main-content">
-      <!-- Location Cards Grid -->
-      <section class="locations-section">
-        <h2>Locations</h2>
-        <div id="location-grid" class="location-grid">
-          <!-- Location cards will be loaded here -->
-        </div>
-      </section>
-      
-      <!-- Monster Details Modal/Section -->
-      <section class="monster-section" id="monster-section" style="display: none;">
-        <div class="section-header">
-          <button class="back-btn" id="back-btn">← Back to Locations</button>
-          <h2 id="location-title">Monsters in Location</h2>
-          <div class="progress-summary" id="progress-summary"></div>
-        </div>
-        
-        <div id="monster-grid" class="monster-grid">
-          <!-- Monster cards will be loaded here -->
-        </div>
-      </section>
-      
-      <!-- Monster Detail Modal -->
-      <div class="modal-overlay" id="monster-detail-modal" style="display: none;">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 id="modal-monster-name">Monster Name</h3>
-            <button class="close-btn" id="close-modal">×</button>
-          </div>
-          <div class="modal-body" id="modal-monster-details">
-            <!-- Monster details will be loaded here -->
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-  
-  <script src="app.js"></script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

@@ -4,11 +4,13 @@
  * This enhanced version features a card-based UI with visual progress indicators,
  * smooth animations, and mobile-optimized interactions. The app tracks captured
  * monsters using localStorage and provides detailed monster information in modals.
+ * Now includes a comprehensive items database with source tracking.
  */
 
 (() => {
   let data;
   let currentLocation = null;
+  let currentTab = 'locations';
 
   // Load the dataset
   fetch('ffx_monsters.json')
@@ -28,6 +30,11 @@
     const backBtn = document.getElementById('back-btn');
     const modal = document.getElementById('monster-detail-modal');
     const closeModal = document.getElementById('close-modal');
+    
+    // Items elements
+    const itemsGrid = document.getElementById('items-grid');
+    const itemDetailsSection = document.getElementById('item-details-section');
+    const backToItemsBtn = document.getElementById('back-to-items-btn');
 
     // Build a lookup for item IDs to names
     const itemMap = {};
@@ -43,6 +50,32 @@
 
     function setCapturedCount(id, val) {
       localStorage.setItem('captured_' + id, String(val));
+    }
+
+    // Tab switching functionality
+    function switchTab(tabName) {
+      currentTab = tabName;
+      
+      // Update tab buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabName);
+      });
+      
+      // Update tab content
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.toggle('active', content.id === `${tabName}-tab`);
+      });
+      
+      // Reset any open sections
+      if (tabName === 'locations') {
+        document.querySelector('.locations-section').style.display = 'block';
+        monsterSection.style.display = 'none';
+        currentLocation = null;
+      } else if (tabName === 'items') {
+        document.querySelector('.items-section').style.display = 'block';
+        itemDetailsSection.style.display = 'none';
+        renderItems();
+      }
     }
 
     // Progress calculation
@@ -101,6 +134,39 @@
       return '👾'; // default
     }
 
+    // Get item icon based on name/type
+    function getItemIcon(itemName) {
+      const icons = {
+        'potion': '🧪',
+        'sphere': '🔮',
+        'gem': '💎',
+        'key': '🔑',
+        'scales': '⚖️',
+        'fang': '🦷',
+        'marble': '🔸',
+        'grenade': '💣',
+        'bomb': '💣',
+        'wind': '💨',
+        'water': '💧',
+        'spring': '💧',
+        'tablet': '📜',
+        'tonic': '🧪',
+        'curtain': '🛡️',
+        'feather': '🪶',
+        'wing': '🪶',
+        'hourglass': '⏳',
+        'shadow': '👤',
+        'star': '⭐',
+        'matter': '⚫'
+      };
+      
+      const name = itemName.toLowerCase();
+      for (const [key, icon] of Object.entries(icons)) {
+        if (name.includes(key)) return icon;
+      }
+      return '💎'; // default
+    }
+
     // Render location cards
     function renderLocations() {
       locationGrid.innerHTML = '';
@@ -131,6 +197,175 @@
         
         card.addEventListener('click', () => selectLocation(loc.location_id));
         locationGrid.appendChild(card);
+      });
+    }
+
+    // Render items grid
+    function renderItems() {
+      itemsGrid.innerHTML = '';
+      
+      data.items.forEach((item) => {
+        const icon = getItemIcon(item.item_name);
+        const sources = getItemSources(item.item_id);
+        
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.dataset.itemId = item.item_id;
+        
+        card.innerHTML = `
+          <div class="item-header">
+            <div class="item-icon">${icon}</div>
+            <div class="item-info">
+              <h3>${item.item_name}</h3>
+              <div class="item-sources-preview">${sources.dropCount + sources.stealCount} monster sources</div>
+            </div>
+          </div>
+        `;
+        
+        card.addEventListener('click', () => showItemDetails(item.item_id));
+        itemsGrid.appendChild(card);
+      });
+    }
+
+    // Get item sources (which monsters drop/steal this item)
+    function getItemSources(itemId) {
+      const sources = {
+        drop: {},  // locationId -> monsters
+        steal: {}, // locationId -> monsters
+        dropCount: 0,
+        stealCount: 0
+      };
+      
+      data.monsters.forEach((monster) => {
+        // Check if monster drops this item
+        if (monster.drop_common_items?.includes(itemId) || monster.drop_rare_items?.includes(itemId)) {
+          monster.location_ids.forEach(locationId => {
+            if (!sources.drop[locationId]) sources.drop[locationId] = [];
+            sources.drop[locationId].push(monster);
+          });
+          sources.dropCount++;
+        }
+        
+        // Check if monster has this item as steal
+        if (monster.steal_common_items?.includes(itemId) || monster.steal_rare_items?.includes(itemId)) {
+          monster.location_ids.forEach(locationId => {
+            if (!sources.steal[locationId]) sources.steal[locationId] = [];
+            sources.steal[locationId].push(monster);
+          });
+          sources.stealCount++;
+        }
+      });
+      
+      return sources;
+    }
+
+    // Show item details
+    function showItemDetails(itemId) {
+      const item = data.items.find(i => i.item_id === itemId);
+      if (!item) return;
+      
+      const sources = getItemSources(itemId);
+      
+      // Hide items grid, show item details
+      document.querySelector('.items-section').style.display = 'none';
+      itemDetailsSection.style.display = 'block';
+      
+      // Update section header
+      document.getElementById('item-title').textContent = item.item_name;
+      
+      // Render item sources
+      renderItemSources(sources);
+    }
+
+    // Render item sources (drop and steal sections)
+    function renderItemSources(sources) {
+      const itemSourcesEl = document.getElementById('item-sources');
+      itemSourcesEl.innerHTML = '';
+      
+      // Drop sources section
+      if (Object.keys(sources.drop).length > 0) {
+        const dropSection = document.createElement('div');
+        dropSection.className = 'source-section';
+        dropSection.innerHTML = `
+          <h3>💰 Dropped by Monsters</h3>
+          <div class="source-locations" id="drop-locations"></div>
+        `;
+        
+        const dropLocationsEl = dropSection.querySelector('#drop-locations');
+        
+        Object.entries(sources.drop).forEach(([locationId, monsters]) => {
+          const location = data.locations.find(l => l.location_id == locationId);
+          const locationEl = document.createElement('div');
+          locationEl.className = 'source-location';
+          
+          locationEl.innerHTML = `
+            <h4>${getLocationIcon(location.location_name)} ${location.location_name}</h4>
+            <div class="monster-list">
+              ${monsters.map(monster => `
+                <span class="monster-badge" data-monster-id="${monster.monster_id}">
+                  ${getMonsterAvatar(monster.name)} ${monster.name}
+                </span>
+              `).join('')}
+            </div>
+          `;
+          
+          dropLocationsEl.appendChild(locationEl);
+        });
+        
+        itemSourcesEl.appendChild(dropSection);
+      }
+      
+      // Steal sources section
+      if (Object.keys(sources.steal).length > 0) {
+        const stealSection = document.createElement('div');
+        stealSection.className = 'source-section';
+        stealSection.innerHTML = `
+          <h3>🥷 Stolen from Monsters</h3>
+          <div class="source-locations" id="steal-locations"></div>
+        `;
+        
+        const stealLocationsEl = stealSection.querySelector('#steal-locations');
+        
+        Object.entries(sources.steal).forEach(([locationId, monsters]) => {
+          const location = data.locations.find(l => l.location_id == locationId);
+          const locationEl = document.createElement('div');
+          locationEl.className = 'source-location';
+          
+          locationEl.innerHTML = `
+            <h4>${getLocationIcon(location.location_name)} ${location.location_name}</h4>
+            <div class="monster-list">
+              ${monsters.map(monster => `
+                <span class="monster-badge" data-monster-id="${monster.monster_id}">
+                  ${getMonsterAvatar(monster.name)} ${monster.name}
+                </span>
+              `).join('')}
+            </div>
+          `;
+          
+          stealLocationsEl.appendChild(locationEl);
+        });
+        
+        itemSourcesEl.appendChild(stealSection);
+      }
+      
+      // If no sources found
+      if (Object.keys(sources.drop).length === 0 && Object.keys(sources.steal).length === 0) {
+        itemSourcesEl.innerHTML = `
+          <div class="source-section">
+            <h3>No Sources Found</h3>
+            <p>This item is not dropped or stolen by any monsters in the database.</p>
+          </div>
+        `;
+      }
+      
+      // Add click listeners to monster badges to show monster details
+      itemSourcesEl.addEventListener('click', (e) => {
+        if (e.target.classList.contains('monster-badge')) {
+          const monsterId = parseInt(e.target.dataset.monsterId);
+          if (monsterId) {
+            showMonsterDetails(monsterId);
+          }
+        }
       });
     }
 
@@ -329,11 +564,23 @@
       setTimeout(() => errorDiv.remove(), 5000);
     }
 
+    // Tab event listeners
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchTab(btn.dataset.tab);
+      });
+    });
+
     // Event listeners
     backBtn.addEventListener('click', () => {
       document.querySelector('.locations-section').style.display = 'block';
       monsterSection.style.display = 'none';
       currentLocation = null;
+    });
+
+    backToItemsBtn.addEventListener('click', () => {
+      document.querySelector('.items-section').style.display = 'block';
+      itemDetailsSection.style.display = 'none';
     });
 
     closeModal.addEventListener('click', () => {
@@ -351,13 +598,16 @@
       if (e.key === 'Escape') {
         if (modal.style.display === 'flex') {
           modal.style.display = 'none';
-        } else if (monsterSection.style.display === 'block') {
+        } else if (currentTab === 'locations' && monsterSection.style.display === 'block') {
           backBtn.click();
+        } else if (currentTab === 'items' && itemDetailsSection.style.display === 'block') {
+          backToItemsBtn.click();
         }
       }
     });
 
     // Initialize the app
     renderLocations();
+    switchTab('locations'); // Start with locations tab active
   }
 })();

@@ -1,0 +1,32 @@
+{
+  "name": "ffxmonsterlist",
+  "version": "1.0.0",
+  "description": "Final Fantasy X Monster Arena Guide",
+  "main": "src/main.jsx",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianbest/FFXMonsterList.git"
+  },
+  "keywords": ["ffx", "final-fantasy", "monster", "tracker", "react"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brianbest/FFXMonsterList/issues"
+  },
+  "homepage": "https://github.com/brianbest/FFXMonsterList#readme",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "vite": "^6.0.1"
+  }
+}

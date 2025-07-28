@@ -1,5 +1,5 @@
 # Node modules in ffx-backend
-ffx-backend/node_modules/
+/node_modules
 
 # Environment variables
 ffx-backend/.env
