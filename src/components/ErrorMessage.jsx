@@ -1,20 +1,17 @@
 import React from 'react';
 
-function ErrorMessage({ message }) {
+function ErrorMessage({ message, suggestion, type = 'error' }) {
+  const isSearchEmpty = type === 'search-empty';
+  
   return (
-    <div style={{
-      position: 'fixed',
-      top: '1rem',
-      right: '1rem',
-      background: 'var(--error-color)',
-      color: 'white',
-      padding: '1rem',
-      borderRadius: 'var(--radius-md)',
-      boxShadow: 'var(--shadow-lg)',
-      zIndex: 1001,
-      maxWidth: '400px'
-    }}>
-      {message}
+    <div className={`error-message ${isSearchEmpty ? 'search-empty' : ''}`}>
+      <div className="error-content">
+        {isSearchEmpty && <div className="error-icon">🔍</div>}
+        <div className="error-text">
+          <h3>{message}</h3>
+          {suggestion && <p className="error-suggestion">{suggestion}</p>}
+        </div>
+      </div>
     </div>
   );
 }
