@@ -1,0 +1,21 @@
+{
+  "name": "ffxmonsterlist",
+  "version": "1.0.0",
+  "description": "A vertical slice implementation of a Conditional Turn-Based (CTB) battle system, inspired by Final Fantasy X. This project demonstrates a deterministic combat engine where turn frequency is based on character Agility and action costs, visualized with a predictive timeline.",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianbest/FFXMonsterList.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/brianbest/FFXMonsterList/issues"
+  },
+  "homepage": "https://github.com/brianbest/FFXMonsterList#readme"
+}
